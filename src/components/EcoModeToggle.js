@@ -15,18 +15,20 @@ const EcoModeToggle = () => {
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
+        width="24"
+        height="24"
         viewBox="0 0 24 24"
-        fill="none"
+        fill={isEcoModeActive ? "rgba(22, 163, 74, 0.2)" : "none"}
         stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        strokeWidth="1"
+        strokeDasharray={isEcoModeActive ? "0" : "2"}
         className={`transition-transform duration-300 ${isEcoModeActive ? 'rotate-12' : ''}`}
       >
-        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z" />
-        <path d="M12 2c0 5.5 4.5 10 10 10-5.5 0-10 4.5-10 10 0-5.5-4.5-10-10-10 5.5 0 10-4.5 10-10z" />
+        {/* Leaf path that resembles the dotted outline in the image */}
+        <path d="M6 3C7.5 3.5 10.5 6.5 12 8C14.5 10.5 15.5 14.5 15 18C14.5 21.5 12 22 10.5 22C9 22 7 21 6 18.5C5 16 5.5 13 7 11C8.5 9 11 8 14 8C17 8 20 10 21 12" 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
+        />
       </svg>
     </button>
   );
