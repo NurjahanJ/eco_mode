@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 // ThemeProvider removed as it's not being used in components
 import { PromptCountProvider } from './contexts/PromptCountContext';
 import { ModelProvider } from './contexts/ModelContext';
+import { EcoModeProvider } from './contexts/EcoModeContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <PromptCountProvider>
       <ModelProvider>
-        <App />
+        <EcoModeProvider>
+          <App />
+        </EcoModeProvider>
       </ModelProvider>
     </PromptCountProvider>
   </React.StrictMode>
