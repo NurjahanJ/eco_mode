@@ -4,6 +4,7 @@ import ChatHistory from './components/ChatHistory';
 import ChatInput from './components/ChatInput';
 import Header from './components/Header';
 import logo from './images/logo.png';
+import { useEcoMode } from './contexts/EcoModeContext';
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -14,6 +15,7 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
+  const { isEcoModeActive } = useEcoMode();
 
   useEffect(() => {
     scrollToBottom();
@@ -199,11 +201,22 @@ function App() {
       
       {/* Main content */}
       <div className="flex flex-col flex-1 overflow-hidden">
-        <Header />
+        <Header hasMessages={messages.length > 0} />
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
             <div className="text-center max-w-xl mb-6">
-              <h2 className="text-3xl mb-10">Welcome! Do you have <span className="text-green-600">Eco Mode</span> on?</h2>
+              <h2 className="text-3xl mb-10">
+                {isEcoModeActive ? (
+                  <>
+                    <div className="text-2xl font-medium text-green-600 mb-3">Eco Mode Chat: Greener AI</div>
+                    <div className="text-base text-gray-600">
+                      This chat won't appear in history, use or update ChatGPT's memory, or be used to train our models.
+                    </div>
+                  </>
+                ) : (
+                  <>Welcome! Do you have <span className="text-green-600">Eco Mode</span> on?</>
+                )}
+              </h2>
             </div>
             <div className="w-full max-w-[850px]">
               <ChatInput onSendMessage={handleSendMessage} disabled={loading} />
