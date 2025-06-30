@@ -20,12 +20,13 @@ const EcoModeToggle = () => {
         viewBox="0 0 24 24"
         fill={isEcoModeActive ? "rgba(22, 163, 74, 0.2)" : "none"}
         stroke="currentColor"
-        strokeWidth="1"
+        strokeWidth="1.5"
         strokeDasharray={isEcoModeActive ? "0" : "2"}
         className={`transition-transform duration-300 ${isEcoModeActive ? 'rotate-12' : ''}`}
       >
-        {/* Leaf path that resembles the dotted outline in the image */}
-        <path d="M6 3C7.5 3.5 10.5 6.5 12 8C14.5 10.5 15.5 14.5 15 18C14.5 21.5 12 22 10.5 22C9 22 7 21 6 18.5C5 16 5.5 13 7 11C8.5 9 11 8 14 8C17 8 20 10 21 12" 
+        {/* Simple leaf path matching the provided image */}
+        <path 
+          d="M6 21c4-2 8-5 9-9c1-4-2-8-6-9c-4 1-7 4-8 8c-1 4 1 8 5 10zM6 21v-4" 
           strokeLinecap="round" 
           strokeLinejoin="round" 
         />

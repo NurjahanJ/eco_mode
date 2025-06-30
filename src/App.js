@@ -206,7 +206,16 @@ function App() {
           <div className="flex flex-col items-center justify-center h-full">
             <div className="text-center max-w-xl mb-6">
               <h2 className="text-3xl mb-10">
-                <>Welcome! Do you have <span className="text-green-600">Eco Mode</span> on?</>
+                {isEcoModeActive ? (
+                  <>
+                    <div className="text-2xl font-medium text-green-600 mb-3">Eco Mode Chat: Greener AI</div>
+                    <div className="text-base text-gray-600">
+                      This chat won't appear in history, use or update ChatGPT's memory, or be used to train our models.
+                    </div>
+                  </>
+                ) : (
+                  <>Welcome! Do you have <span className="text-green-600">Eco Mode</span> on?</>
+                )}
               </h2>
             </div>
             <div className="w-full max-w-[850px]">
