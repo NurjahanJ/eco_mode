@@ -203,7 +203,7 @@ function App() {
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
             <div className="text-center max-w-xl mb-6">
-              <h2 className="text-3xl mb-10">What's on the agenda today?</h2>
+              <h2 className="text-3xl mb-10">Welcome! Do you have <span className="text-green-600">Eco Mode</span> on?</h2>
             </div>
             <div className="w-full max-w-[850px]">
               <ChatInput onSendMessage={handleSendMessage} disabled={loading} />
