@@ -3,13 +3,11 @@ import { sendConversation, createUserMessage, createAssistantMessage } from './s
 import ChatHistory from './components/ChatHistory';
 import ChatInput from './components/ChatInput';
 import Header from './components/Header';
-import logo from './images/logo.png';
 import { useEcoMode } from './contexts/EcoModeContext';
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [currentConversationId, setCurrentConversationId] = useState('1');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
