@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEcoMode } from '../contexts/EcoModeContext';
+import leafIcon from '../images/leaf-icon.svg';
 
 const EcoModeToggle = () => {
   const { isEcoModeActive, toggleEcoMode } = useEcoMode();
@@ -13,24 +14,16 @@ const EcoModeToggle = () => {
       title={isEcoModeActive ? 'Eco Mode Active' : 'Activate Eco Mode'}
       aria-label={isEcoModeActive ? 'Disable Eco Mode' : 'Enable Eco Mode'}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
+      <img
+        src={leafIcon}
+        alt="Eco Mode"
         width="24"
         height="24"
-        viewBox="0 0 24 24"
-        fill={isEcoModeActive ? "rgba(22, 163, 74, 0.2)" : "none"}
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeDasharray={isEcoModeActive ? "0" : "2"}
-        className={`transition-transform duration-300 ${isEcoModeActive ? 'rotate-12' : ''}`}
-      >
-        {/* Simple leaf path matching the provided image */}
-        <path 
-          d="M6 21c4-2 8-5 9-9c1-4-2-8-6-9c-4 1-7 4-8 8c-1 4 1 8 5 10zM6 21v-4" 
-          strokeLinecap="round" 
-          strokeLinejoin="round" 
-        />
-      </svg>
+        className={`transition-transform duration-300 ${isEcoModeActive ? 'rotate-12 filter-green' : 'filter-black'}`}
+        style={{
+          filter: isEcoModeActive ? 'invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(90%) contrast(80%)' : 'none'
+        }}
+      />
     </button>
   );
 };
