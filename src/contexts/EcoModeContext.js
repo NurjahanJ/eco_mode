@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import EcoModeConfirmationModal from '../components/EcoModeConfirmationModal';
 
 // Create a context for eco mode management
 const EcoModeContext = createContext();
@@ -17,6 +18,7 @@ export const EcoModeProvider = ({ children }) => {
   };
 
   const [isEcoModeActive, setIsEcoModeActive] = useState(getInitialState);
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   
   // Update localStorage when eco mode state changes
   useEffect(() => {
@@ -25,9 +27,26 @@ export const EcoModeProvider = ({ children }) => {
     }
   }, [isEcoModeActive]);
   
-  // Toggle eco mode state
+  // Handle eco mode toggle
   const toggleEcoMode = () => {
-    setIsEcoModeActive(prevState => !prevState);
+    // If eco mode is currently active and user wants to turn it off, show confirmation
+    if (isEcoModeActive) {
+      setShowConfirmationModal(true);
+    } else {
+      // If turning on eco mode, no confirmation needed
+      setIsEcoModeActive(true);
+    }
+  };
+  
+  // Confirm turning off eco mode
+  const confirmTurnOffEcoMode = () => {
+    setIsEcoModeActive(false);
+    setShowConfirmationModal(false);
+  };
+  
+  // Cancel turning off eco mode
+  const cancelTurnOffEcoMode = () => {
+    setShowConfirmationModal(false);
   };
 
   return (
@@ -36,6 +55,11 @@ export const EcoModeProvider = ({ children }) => {
       toggleEcoMode
     }}>
       {children}
+      <EcoModeConfirmationModal 
+        isOpen={showConfirmationModal}
+        onKeepEcoMode={cancelTurnOffEcoMode}
+        onTurnOff={confirmTurnOffEcoMode}
+      />
     </EcoModeContext.Provider>
   );
 };
