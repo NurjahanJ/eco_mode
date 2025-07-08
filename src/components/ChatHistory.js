@@ -13,10 +13,7 @@ const ChatHistory = ({ messages, messagesEndRef }) => {
     }
   }, [messages]);
 
-  // Check if there are at least 2 messages (first user prompt and its response)
-  const hasFirstPromptAndResponse = messages.length >= 2 && 
-    messages[0].role === 'user' && 
-    messages[1].role === 'assistant';
+  // We show the Eco Mode notification after the first assistant response (index 1)
 
   return (
     <div className="w-full max-w-[850px] mx-auto px-4" ref={historyRef}>
