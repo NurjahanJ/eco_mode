@@ -183,7 +183,7 @@ const SettingsPopup = ({ isOpen, onClose }) => {
               {/* Footer text */}
               <p className="text-sm text-gray-500 mt-8">
                 ChatGPT may use Memory to personalize queries to search providers, such as Bing.
-                <a href="#" className="text-blue-500 ml-1">Learn more</a>
+                <button className="text-blue-500 ml-1 underline">Learn more</button>
               </p>
             </div>
           </div>

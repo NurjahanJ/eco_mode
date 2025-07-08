@@ -3,7 +3,6 @@ import { sendConversation, createUserMessage, createAssistantMessage } from './s
 import ChatHistory from './components/ChatHistory';
 import ChatInput from './components/ChatInput';
 import Header from './components/Header';
-import EcoModeToggle from './components/EcoModeToggle';
 import { useEcoMode } from './contexts/EcoModeContext';
 import logo from './images/logo.png';
 
