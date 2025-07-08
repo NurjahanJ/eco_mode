@@ -10,6 +10,7 @@ function App() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  // No longer need these state variables as notification is handled in ChatHistory component
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
   const { isEcoModeActive } = useEcoMode();
@@ -34,7 +35,10 @@ function App() {
     const updatedMessages = [...messages, userMessage];
     setMessages(updatedMessages);
 
-    if (isEcoModeActive && newPromptCount === 3) {
+    if (isEcoModeActive && newPromptCount === 1) {
+      // First prompt with Eco Mode active - notification will be shown in ChatHistory
+      sendActualResponse([...updatedMessages], modelId);
+    } else if (isEcoModeActive && newPromptCount === 3) {
       const reroutingMessage = {
         role: 'assistant',
         content: `🟡 **Processing query**\n\nLots of people are making queries in your region right now, so please hang tight for about 30 seconds! We are trying to reroute your prompt to more energy-efficient data centers or aggregate similar responses to process in batch.`,
@@ -48,7 +52,6 @@ function App() {
       setTimeout(() => {
         sendActualResponse([...updatedMessages], modelId);
       }, 5000);
-
     } else {
       sendActualResponse([...updatedMessages], modelId);
     }
@@ -229,6 +232,7 @@ function App() {
                   loading={loading}
                   messagesEndRef={messagesEndRef}
                 />
+
               </div>
             </div>
             <div className="p-4 bg-white flex justify-center">
