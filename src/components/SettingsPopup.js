@@ -7,9 +7,9 @@ const SettingsPopup = ({ isOpen, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg w-full max-w-3xl h-[90vh] max-h-[800px] flex overflow-hidden">
+      <div className="bg-white rounded-lg w-full max-w-2xl h-[80vh] max-h-[700px] flex overflow-hidden">
         {/* Sidebar */}
-        <div className="w-56 border-r border-gray-200 p-4 bg-gray-50">
+        <div className="w-52 border-r border-gray-200 p-4 bg-gray-50">
           <div className="flex items-center mb-6">
             <button 
               onClick={onClose}
