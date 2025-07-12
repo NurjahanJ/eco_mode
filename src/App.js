@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { sendConversation, createUserMessage, createAssistantMessage } from './services/api';
 import ChatHistory from './components/ChatHistory';
 import ChatInput from './components/ChatInput';
@@ -16,7 +16,7 @@ function App() {
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
   const { isEcoModeActive } = useEcoMode();
-  const navigate = useNavigate();
+  // const navigate = useNavigate(); // Removed unused variable
 
   useEffect(() => {
     scrollToBottom();
@@ -102,7 +102,7 @@ function App() {
     }
   };
 
-  const location = useLocation();
+  // const location = useLocation(); // Removed unused variable
   
   return (
     <Routes>
