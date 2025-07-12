@@ -1,8 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useEcoMode } from '../contexts/EcoModeContext';
 
 const SettingsPopup = ({ isOpen, onClose }) => {
   const { isEcoModeActive, toggleEcoMode } = useEcoMode();
+  const navigate = useNavigate();
+  
   if (!isOpen) return null;
 
   return (
@@ -115,10 +118,15 @@ const SettingsPopup = ({ isOpen, onClose }) => {
               <div>
                 <div className="flex items-center">
                   <h3 className="font-medium">Eco mode</h3>
-                  <div className="relative ml-2 group">
-                    <div className="cursor-help text-gray-500 w-5 h-5 rounded-full border border-gray-500 flex items-center justify-center">
-                      <span className="text-sm font-bold">?</span>
-                    </div>
+                  <div 
+                    className="ml-2 cursor-pointer text-gray-500 w-5 h-5 rounded-full border border-gray-500 flex items-center justify-center relative group"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onClose(); // Close the settings popup first
+                      navigate('/eco-mode-faq'); // Navigate to the FAQ page
+                    }}
+                  >
+                    <span className="text-sm font-bold">?</span>
                     <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block w-48 p-2 bg-black text-white text-xs rounded shadow-lg z-10">
                       Learn more about how you can save the planet
                     </div>
