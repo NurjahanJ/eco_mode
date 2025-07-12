@@ -30,7 +30,7 @@ const EcoModeFAQ = () => {
           
           {/* Table of Contents */}
           <div className="mb-8 border rounded-lg overflow-hidden">
-            <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3 border-b">
+            <div className="bg-gray-50 dark:bg-gray-700 px-4 py-3">
               <h2 className="font-medium">Table of Contents</h2>
             </div>
             <div className="p-4">
@@ -118,7 +118,7 @@ const EcoModeFAQ = () => {
             <div id="how-it-works" className="scroll-mt-4">
               <h2 className="text-xl font-medium mb-3">How Eco Mode works</h2>
               <p className="text-gray-700 dark:text-gray-300">
-                Eco Mode optimizes energy usage by intelligently managing query processing. When activated, it implements several strategies: batching similar queries to process them together, routing requests to data centers powered by renewable energy when possible, and slightly delaying non-urgent queries to optimize server load. This smart resource allocation can reduce energy consumption by up to 30% while maintaining response quality, with only minimal impact on response times for non-critical queries.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
             </div>
             
