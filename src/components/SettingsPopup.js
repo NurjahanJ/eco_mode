@@ -1,8 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useEcoMode } from '../contexts/EcoModeContext';
 
 const SettingsPopup = ({ isOpen, onClose }) => {
   const { isEcoModeActive, toggleEcoMode } = useEcoMode();
+  const navigate = useNavigate();
+  
   if (!isOpen) return null;
 
   return (
@@ -113,7 +116,22 @@ const SettingsPopup = ({ isOpen, onClose }) => {
             {/* Eco Mode toggle */}
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="font-medium">Eco mode</h3>
+                <div className="flex items-center">
+                  <h3 className="font-medium">Eco mode</h3>
+                  <div 
+                    className="ml-2 cursor-pointer text-gray-500 w-5 h-5 rounded-full border border-gray-500 flex items-center justify-center relative group"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onClose(); // Close the settings popup first
+                      navigate('/eco-mode-faq'); // Navigate to the FAQ page
+                    }}
+                  >
+                    <span className="text-sm font-bold">?</span>
+                    <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block w-48 p-2 bg-black text-white text-xs rounded shadow-lg z-10">
+                      Learn more about how you can save the planet
+                    </div>
+                  </div>
+                </div>
                 <p className="text-sm text-gray-500 mt-1">Let ChatGPT save energy by delaying energy-intensive queries.</p>
               </div>
               <div>
@@ -133,12 +151,8 @@ const SettingsPopup = ({ isOpen, onClose }) => {
             <div>
               <div className="flex items-center mb-4">
                 <h2 className="text-lg font-medium">Memory</h2>
-                <div className="ml-2 text-gray-500">
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5"/>
-                    <path d="M8 5V8.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                    <circle cx="8" cy="11" r="0.5" fill="currentColor"/>
-                  </svg>
+                <div className="ml-2 text-gray-500 w-5 h-5 rounded-full border border-gray-500 flex items-center justify-center">
+                  <span className="text-sm font-bold">?</span>
                 </div>
               </div>
               
