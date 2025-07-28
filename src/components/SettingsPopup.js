@@ -123,7 +123,7 @@ const SettingsPopup = ({ isOpen, onClose }) => {
                     onClick={(e) => {
                       e.stopPropagation();
                       onClose(); // Close the settings popup first
-                      navigate('/eco-mode-faq'); // Navigate to the FAQ page
+                      window.open('/eco-mode-faq', '_blank'); // Open the FAQ page in a new tab
                     }}
                   >
                     <span className="text-sm font-bold">?</span>
