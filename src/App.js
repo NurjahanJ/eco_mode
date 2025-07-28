@@ -42,7 +42,7 @@ function App() {
     if (isEcoModeActive && newPromptCount === 1) {
       // First prompt with EcoMode active - notification will be shown in ChatHistory
       sendActualResponse([...updatedMessages], modelId);
-    } else if (isEcoModeActive && newPromptCount === 3) {
+    } else if (isEcoModeActive && (newPromptCount === 3 || newPromptCount === 6)) {
       const reroutingMessage = {
         role: 'assistant',
         content: `🟡 **Processing query**\n\nLots of people are making queries in your region right now, so please hang tight for about 10~45 seconds! We are trying to reroute your prompt to more energy-efficient data centers or aggregate similar responses to process in batch.`,
