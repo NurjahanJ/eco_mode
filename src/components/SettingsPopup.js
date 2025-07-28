@@ -1,10 +1,8 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useEcoMode } from '../contexts/EcoModeContext';
 
 const SettingsPopup = ({ isOpen, onClose }) => {
   const { isEcoModeActive, toggleEcoMode } = useEcoMode();
-  const navigate = useNavigate();
   
   if (!isOpen) return null;
 
