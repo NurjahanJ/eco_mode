@@ -7,6 +7,7 @@ import Header from './components/Header';
 import { useEcoMode } from './contexts/EcoModeContext';
 import EcoModeFAQ from './components/EcoModeFAQ';
 import logo from './images/logo.png';
+import leafIcon from './images/leaf-icon.svg';
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -44,7 +45,7 @@ function App() {
     } else if (isEcoModeActive && newPromptCount === 3) {
       const reroutingMessage = {
         role: 'assistant',
-        content: `🟡 **Processing query**\n\nLots of people are making queries in your region right now, so please hang tight for about 30 seconds! We are trying to reroute your prompt to more energy-efficient data centers or aggregate similar responses to process in batch.`,
+        content: `🟡 **Processing query**\n\nLots of people are making queries in your region right now, so please hang tight for about 10~45 seconds! We are trying to reroute your prompt to more energy-efficient data centers or aggregate similar responses to process in batch.`,
         isEcoNotice: true,
         timestamp: new Date().toISOString(),
       };
@@ -54,7 +55,7 @@ function App() {
 
       setTimeout(() => {
         sendActualResponse([...updatedMessages], modelId);
-      }, 5000);
+      }, 15000);
     } else {
       sendActualResponse([...updatedMessages], modelId);
     }
@@ -218,11 +219,12 @@ function App() {
                         </div>
                       </>
                     ) : (
-                      <>Welcome! Do you have <span 
-                        className="text-green-600 underline cursor-pointer" 
+                      <>Do you have the <span className="text-green-600">EcoMode</span> on? Click on <img 
+                        src={leafIcon} 
+                        alt="EcoMode Icon" 
+                        className="inline-block w-6 h-6 cursor-pointer" 
                         onClick={() => !isEcoModeActive && toggleEcoMode()}
-                        style={{ textDecoration: 'underline' }}
-                      >EcoMode</span> on?</>
+                      /> to turn it on!</>
                     )}
                   </h2>
                 </div>

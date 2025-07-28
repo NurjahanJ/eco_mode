@@ -14,7 +14,7 @@ const EcoModeNotification = ({ isVisible }) => {
       />
       <div>
         <p className="text-base">
-          The response will be processed in EcoMode
+          Responses are processed in EcoMode
         </p>
         <p className="text-sm text-gray-300">
           for energy efficiency
