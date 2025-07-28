@@ -126,8 +126,14 @@ function App() {
           <div className={`flex flex-col h-full ${sidebarOpen ? 'w-[260px] min-w-[260px]' : 'w-0 min-w-0 overflow-hidden'} bg-gray-50 border-r border-gray-200 overflow-y-auto transition-all duration-300`}>
             <div className="flex items-center justify-between p-4">
               <div className="flex items-center">
-                <img src={logo} alt="Logo" className="w-8 h-8 mr-2" />
-                <span className="font-medium">ChatGPT</span>
+                <img 
+                  src={logo} 
+                  alt="Logo" 
+                  className="w-8 h-8 mr-2 cursor-pointer" 
+                  onClick={() => {
+                    setMessages([]);
+                  }}
+                />
               </div>
               <button 
                 onClick={() => setSidebarOpen(false)}
