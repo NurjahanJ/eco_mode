@@ -11,12 +11,12 @@ const EcoModeToggle = () => {
       className={`p-2 rounded-full transition-colors duration-300 ${
         isEcoModeActive ? 'text-green-600 hover:bg-green-100' : 'text-gray-500 hover:bg-gray-100'
       }`}
-      title={isEcoModeActive ? 'Eco Mode Active' : 'Activate Eco Mode'}
-      aria-label={isEcoModeActive ? 'Disable Eco Mode' : 'Enable Eco Mode'}
+      title={isEcoModeActive ? 'EcoMode Active' : 'Activate EcoMode'}
+      aria-label={isEcoModeActive ? 'Disable EcoMode' : 'Enable EcoMode'}
     >
       <img
         src={leafIcon}
-        alt="Eco Mode"
+        alt="EcoMode"
         width="24"
         height="24"
         className={`transition-transform duration-300 ${isEcoModeActive ? 'rotate-12 filter-green' : 'filter-black'}`}

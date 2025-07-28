@@ -113,11 +113,11 @@ const SettingsPopup = ({ isOpen, onClose }) => {
               </div>
             </div>
             
-            {/* Eco Mode toggle */}
+            {/* EcoMode toggle */}
             <div className="flex items-center justify-between">
               <div>
                 <div className="flex items-center">
-                  <h3 className="font-medium">Eco mode</h3>
+                  <h3 className="font-medium">EcoMode</h3>
                   <div 
                     className="ml-2 cursor-pointer text-gray-500 w-5 h-5 rounded-full border border-gray-500 flex items-center justify-center relative group"
                     onClick={(e) => {

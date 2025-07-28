@@ -13,7 +13,7 @@ const ChatHistory = ({ messages, messagesEndRef }) => {
     }
   }, [messages]);
 
-  // We show the Eco Mode notification after the first assistant response (index 1)
+  // We show the EcoMode notification after the first assistant response (index 1)
 
   return (
     <div className="w-full max-w-[850px] mx-auto px-4" ref={historyRef}>
@@ -22,7 +22,7 @@ const ChatHistory = ({ messages, messagesEndRef }) => {
           // Render the message
           const messageBubble = <MessageBubble key={index} message={message} />;
           
-          // If this is the first assistant response and Eco Mode is active, show notification after it
+          // If this is the first assistant response and EcoMode is active, show notification after it
           if (index === 1 && message.role === 'assistant' && isEcoModeActive) {
             return (
               <React.Fragment key={index}>

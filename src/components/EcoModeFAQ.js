@@ -19,13 +19,13 @@ const EcoModeFAQ = () => {
               </svg>
             </button>
             <div className="flex items-center">
-              <h1 className="text-2xl font-bold">Eco Mode FAQ</h1>
+              <h1 className="text-2xl font-bold">EcoMode FAQ</h1>
             </div>
           </div>
           
           {/* Subtitle */}
           <p className="text-gray-600 dark:text-gray-300 mb-8">
-            Learn more about how Eco Mode can help us save energy and reduce environmental impact
+            Learn more about how EcoMode can help us save energy and reduce environmental impact
           </p>
           
           {/* Table of Contents */}
@@ -48,7 +48,7 @@ const EcoModeFAQ = () => {
                     onClick={() => document.getElementById('how-it-works').scrollIntoView({ behavior: 'smooth' })}
                     className="text-blue-600 dark:text-blue-400 hover:underline text-left"
                   >
-                    How Eco Mode works
+                    How EcoMode works
                   </button>
                 </li>
                 <li>
@@ -56,7 +56,7 @@ const EcoModeFAQ = () => {
                     onClick={() => document.getElementById('enable-disable').scrollIntoView({ behavior: 'smooth' })}
                     className="text-blue-600 dark:text-blue-400 hover:underline text-left"
                   >
-                    How do I enable or disable Eco Mode?
+                    How do I enable or disable EcoMode?
                   </button>
                 </li>
               </ul>
@@ -102,7 +102,7 @@ const EcoModeFAQ = () => {
                 </div>
                 
                 <p className="text-gray-700 dark:text-gray-300">
-                  Data centers running these AI models can consume as much electricity as small towns, highlighting the importance of energy efficiency measures like Eco Mode.
+                  Data centers running these AI models can consume as much electricity as small towns, highlighting the importance of energy efficiency measures like EcoMode.
                 </p>
                 
                 <p className="text-sm text-gray-500 dark:text-gray-400 italic">
@@ -116,25 +116,25 @@ const EcoModeFAQ = () => {
             </div>
             
             <div id="how-it-works" className="scroll-mt-4">
-              <h2 className="text-xl font-medium mb-3">How Eco Mode works</h2>
+              <h2 className="text-xl font-medium mb-3">How EcoMode works</h2>
               <p className="text-gray-700 dark:text-gray-300">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
               </p>
             </div>
             
             <div id="enable-disable" className="scroll-mt-4">
-              <h2 className="text-xl font-medium mb-3">How do I enable or disable Eco Mode?</h2>
+              <h2 className="text-xl font-medium mb-3">How do I enable or disable EcoMode?</h2>
               
               <div className="space-y-6">
                 <p className="text-gray-700 dark:text-gray-300">
-                  Enabling or disabling Eco Mode is simple. Follow these steps:
+                  Enabling or disabling EcoMode is simple. Follow these steps:
                 </p>
                 
                 <div className="space-y-8">
                   {/* Option 1 */}
                   <div className="border rounded-lg overflow-hidden">
                     <div className="bg-gray-50 dark:bg-gray-700 px-4 py-2 border-b">
-                      <h3 className="font-medium">Option 1: Find the Eco Mode icon</h3>
+                      <h3 className="font-medium">Option 1: Find the EcoMode icon</h3>
                     </div>
                     <div className="p-4">
                       <p className="text-gray-700 dark:text-gray-300 mb-4">
@@ -144,7 +144,7 @@ const EcoModeFAQ = () => {
                         <div className="border rounded-lg overflow-hidden shadow-sm max-w-md">
                           <img 
                             src="/images/leaf-image.png" 
-                            alt="Eco Mode Leaf Icon" 
+                            alt="EcoMode Leaf Icon" 
                             className="w-full object-contain"
                           />
                         </div>
@@ -155,17 +155,17 @@ const EcoModeFAQ = () => {
                   {/* Option 2 */}
                   <div className="border rounded-lg overflow-hidden">
                     <div className="bg-gray-50 dark:bg-gray-700 px-4 py-2 border-b">
-                      <h3 className="font-medium">Option 2: Access Settings and Toggle Eco Mode</h3>
+                      <h3 className="font-medium">Option 2: Access Settings and Toggle EcoMode</h3>
                     </div>
                     <div className="p-4">
                       <p className="text-gray-700 dark:text-gray-300 mb-4">
-                        Click on the settings icon to open the Settings menu. In the settings panel, you'll find the Eco Mode toggle switch. Click the switch to turn Eco Mode on (green) or off.
+                        Click on the settings icon to open the Settings menu. In the settings panel, you'll find the EcoMode toggle switch. Click the switch to turn EcoMode on (green) or off.
                       </p>
                       <div className="flex justify-center">
                         <div className="border rounded-lg overflow-hidden shadow-sm max-w-md">
                           <img 
                             src="/images/setting-image.png" 
-                            alt="Eco Mode Settings Toggle" 
+                            alt="EcoMode Settings Toggle" 
                             className="w-full object-contain"
                           />
                         </div>

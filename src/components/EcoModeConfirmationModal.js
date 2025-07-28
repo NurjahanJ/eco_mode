@@ -8,7 +8,7 @@ const EcoModeConfirmationModal = ({ isOpen, onKeepEcoMode, onTurnOff }) => {
       <div className="bg-white rounded-lg p-8 max-w-md w-full shadow-xl">
         <div className="text-left">
           <h2 className="text-xl font-medium mb-6 text-left">
-            Switching off Eco-Mode could increase your environmental impact.
+            Switching off EcoMode could increase your environmental impact.
             <br />
             Still wish to proceed?
           </h2>
@@ -18,7 +18,7 @@ const EcoModeConfirmationModal = ({ isOpen, onKeepEcoMode, onTurnOff }) => {
               onClick={onKeepEcoMode}
               className="px-6 py-3 bg-green-700 text-white font-medium rounded hover:bg-green-800 transition-colors"
             >
-              Keep Eco Mode On
+              Keep EcoMode On
             </button>
             
             <button

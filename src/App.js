@@ -39,7 +39,7 @@ function App() {
     setMessages(updatedMessages);
 
     if (isEcoModeActive && newPromptCount === 1) {
-      // First prompt with Eco Mode active - notification will be shown in ChatHistory
+      // First prompt with EcoMode active - notification will be shown in ChatHistory
       sendActualResponse([...updatedMessages], modelId);
     } else if (isEcoModeActive && newPromptCount === 3) {
       const reroutingMessage = {
@@ -212,13 +212,13 @@ function App() {
                   <h2 className="text-3xl mb-10">
                     {isEcoModeActive ? (
                       <>
-                        <div className="text-2xl font-medium text-green-600 mb-3">Eco Mode Chat: Greener AI</div>
+                        <div className="text-2xl font-medium text-green-600 mb-3">EcoMode Chat: Greener AI</div>
                         <div className="text-base text-gray-600">
                           This chat won't appear in history, use or update ChatGPT's memory, or be used to train our models.
                         </div>
                       </>
                     ) : (
-                      <>Welcome! Do you have <span className="text-green-600">Eco Mode</span> on?</>
+                      <>Welcome! Do you have <span className="text-green-600">EcoMode</span> on?</>
                     )}
                   </h2>
                 </div>
