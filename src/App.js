@@ -15,7 +15,7 @@ function App() {
   // No longer need these state variables as notification is handled in ChatHistory component
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
-  const { isEcoModeActive } = useEcoMode();
+  const { isEcoModeActive, toggleEcoMode } = useEcoMode();
   // const navigate = useNavigate(); // Removed unused variable
 
   useEffect(() => {
@@ -218,7 +218,11 @@ function App() {
                         </div>
                       </>
                     ) : (
-                      <>Welcome! Do you have <span className="text-green-600">EcoMode</span> on?</>
+                      <>Welcome! Do you have <span 
+                        className="text-green-600 underline cursor-pointer" 
+                        onClick={() => !isEcoModeActive && toggleEcoMode()}
+                        style={{ textDecoration: 'underline' }}
+                      >EcoMode</span> on?</>
                     )}
                   </h2>
                 </div>
