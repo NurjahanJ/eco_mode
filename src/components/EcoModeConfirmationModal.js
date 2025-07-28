@@ -8,9 +8,7 @@ const EcoModeConfirmationModal = ({ isOpen, onKeepEcoMode, onTurnOff }) => {
       <div className="bg-white rounded-lg p-8 max-w-md w-full shadow-xl">
         <div className="text-left">
           <h2 className="text-xl font-medium mb-6 text-left">
-            Switching off EcoMode could increase your environmental impact.
-            <br />
-            Still wish to proceed?
+            Deactivating EcoMode will stop energy-efficient prompting. Do you still wish to proceed?
           </h2>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
