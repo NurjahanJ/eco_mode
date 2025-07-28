@@ -212,9 +212,9 @@ function App() {
                   <h2 className="text-3xl mb-10">
                     {isEcoModeActive ? (
                       <>
-                        <div className="text-2xl font-medium text-green-600 mb-3">EcoMode Chat: Greener AI</div>
+                        <div className="text-2xl font-medium text-green-600 mb-3">EcoMode</div>
                         <div className="text-base text-gray-600">
-                          This chat won't appear in history, use or update ChatGPT's memory, or be used to train our models.
+                          Based on current energy demands, we may process your request with more energy-efficient models, or through energy-efficient data centers and regions.
                         </div>
                       </>
                     ) : (
