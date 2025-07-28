@@ -7,6 +7,7 @@ import Header from './components/Header';
 import { useEcoMode } from './contexts/EcoModeContext';
 import EcoModeFAQ from './components/EcoModeFAQ';
 import logo from './images/logo.png';
+import leafIcon from './images/leaf-icon.svg';
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -15,7 +16,7 @@ function App() {
   // No longer need these state variables as notification is handled in ChatHistory component
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
-  const { isEcoModeActive } = useEcoMode();
+  const { isEcoModeActive, toggleEcoMode } = useEcoMode();
   // const navigate = useNavigate(); // Removed unused variable
 
   useEffect(() => {
@@ -39,12 +40,12 @@ function App() {
     setMessages(updatedMessages);
 
     if (isEcoModeActive && newPromptCount === 1) {
-      // First prompt with Eco Mode active - notification will be shown in ChatHistory
+      // First prompt with EcoMode active - notification will be shown in ChatHistory
       sendActualResponse([...updatedMessages], modelId);
-    } else if (isEcoModeActive && newPromptCount === 3) {
+    } else if (isEcoModeActive && (newPromptCount === 3 || newPromptCount === 6)) {
       const reroutingMessage = {
         role: 'assistant',
-        content: `🟡 **Processing query**\n\nLots of people are making queries in your region right now, so please hang tight for about 30 seconds! We are trying to reroute your prompt to more energy-efficient data centers or aggregate similar responses to process in batch.`,
+        content: `🟡 **Processing query**\n\nLots of people are making queries in your region right now, so please hang tight for about 10~45 seconds! We are trying to reroute your prompt to more energy-efficient data centers or aggregate similar responses to process in batch.`,
         isEcoNotice: true,
         timestamp: new Date().toISOString(),
       };
@@ -54,7 +55,7 @@ function App() {
 
       setTimeout(() => {
         sendActualResponse([...updatedMessages], modelId);
-      }, 5000);
+      }, 15000);
     } else {
       sendActualResponse([...updatedMessages], modelId);
     }
@@ -125,8 +126,14 @@ function App() {
           <div className={`flex flex-col h-full ${sidebarOpen ? 'w-[260px] min-w-[260px]' : 'w-0 min-w-0 overflow-hidden'} bg-gray-50 border-r border-gray-200 overflow-y-auto transition-all duration-300`}>
             <div className="flex items-center justify-between p-4">
               <div className="flex items-center">
-                <img src={logo} alt="Logo" className="w-8 h-8 mr-2" />
-                <span className="font-medium">ChatGPT</span>
+                <img 
+                  src={logo} 
+                  alt="Logo" 
+                  className="w-8 h-8 mr-2 cursor-pointer" 
+                  onClick={() => {
+                    setMessages([]);
+                  }}
+                />
               </div>
               <button 
                 onClick={() => setSidebarOpen(false)}
@@ -212,13 +219,18 @@ function App() {
                   <h2 className="text-3xl mb-10">
                     {isEcoModeActive ? (
                       <>
-                        <div className="text-2xl font-medium text-green-600 mb-3">Eco Mode Chat: Greener AI</div>
+                        <div className="text-2xl font-medium text-green-600 mb-3">EcoMode</div>
                         <div className="text-base text-gray-600">
-                          This chat won't appear in history, use or update ChatGPT's memory, or be used to train our models.
+                          Based on current energy demands, we may process your request with more energy-efficient models, or through energy-efficient data centers and regions.
                         </div>
                       </>
                     ) : (
-                      <>Welcome! Do you have <span className="text-green-600">Eco Mode</span> on?</>
+                      <>Do you have the <span className="text-green-600">EcoMode</span> on? Click on <img 
+                        src={leafIcon} 
+                        alt="EcoMode Icon" 
+                        className="inline-block w-6 h-6 cursor-pointer" 
+                        onClick={() => !isEcoModeActive && toggleEcoMode()}
+                      /> to turn it on!</>
                     )}
                   </h2>
                 </div>

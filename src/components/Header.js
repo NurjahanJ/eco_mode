@@ -18,7 +18,7 @@ const Header = ({ hasMessages }) => {
           <div className="w-1/3 flex justify-center">
             {isEcoModeActive && hasMessages && (
               <div className="font-medium">
-                Eco Mode Chat
+                EcoMode Chat
               </div>
             )}
           </div>
