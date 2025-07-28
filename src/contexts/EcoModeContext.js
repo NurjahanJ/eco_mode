@@ -8,13 +8,14 @@ const EcoModeContext = createContext();
 export const useEcoMode = () => useContext(EcoModeContext);
 
 export const EcoModeProvider = ({ children }) => {
-  // Get initial EcoMode state from localStorage or default to false
+  // Always start with EcoMode enabled
   const getInitialState = () => {
+    // Force EcoMode to be on by default
     if (typeof window !== 'undefined') {
-      const savedState = localStorage.getItem('ecoModeActive');
-      return savedState ? JSON.parse(savedState) : false;
+      // Set localStorage to true to ensure persistence
+      localStorage.setItem('ecoModeActive', JSON.stringify(true));
     }
-    return false;
+    return true;
   };
 
   const [isEcoModeActive, setIsEcoModeActive] = useState(getInitialState);
