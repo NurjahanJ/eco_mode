@@ -6,7 +6,6 @@ import {
   Clock4,
   Play,
   CircleUserRound,
-  Square,
 } from 'lucide-react';
 import logo from '../images/logo.png';
 
