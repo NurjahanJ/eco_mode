@@ -119,16 +119,16 @@ const ChatInput = ({ onSendMessage, disabled }) => {
                 <div ref={toolsMenuRef} className="fixed w-64 rounded-2xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50" style={{ top: `${toolsMenuPosition.top}px`, left: `${toolsMenuPosition.left}px`, transform: 'translateY(-100%)', marginTop: '-10px' }}>
                   <div className="py-2">
                     <button className="flex items-center w-full px-4 py-3 text-sm text-left text-gray-800 hover:bg-gray-100">
-                      <Paintbrush className="mr-3 h-5 w-5" /> Create an image
+                      <Paintbrush className="mr-3 h-5 w-5" /> Create Image
                     </button>
                     <button className="flex items-center w-full px-4 py-3 text-sm text-left text-gray-800 hover:bg-gray-100">
-                      <Globe className="mr-3 h-5 w-5" /> Search the web
+                      <Globe className="mr-3 h-5 w-5" /> Web Search
                     </button>
                     <button className="flex items-center w-full px-4 py-3 text-sm text-left text-gray-800 hover:bg-gray-100">
-                      <PencilLine className="mr-3 h-5 w-5" /> Write or code
+                      <PencilLine className="mr-3 h-5 w-5" /> Canvas
                     </button>
                     <button className="flex items-center w-full px-4 py-3 text-sm text-left text-gray-800 hover:bg-gray-100">
-                      <Binoculars className="mr-3 h-5 w-5" /> Run deep research <span className="ml-auto text-gray-400 text-xs">24 left</span>
+                      <Binoculars className="mr-3 h-5 w-5" /> Deep Search <span className="ml-auto text-gray-400 text-xs">24 left</span>
                     </button>
                   </div>
                 </div>
