@@ -8,10 +8,9 @@ export const storeConversation = mutation({
     prompt: v.string(),
     response: v.string(),
     ecoModeActive: v.boolean(),
-    timestamp: v.string(),
   },
   handler: async (ctx, args) => {
-    const { userId, prompt, response, ecoModeActive, timestamp } = args;
+    const { userId, prompt, response, ecoModeActive } = args;
     
     // Store the conversation in the database
     const conversationId = await ctx.db.insert("conversations", {
@@ -19,7 +18,6 @@ export const storeConversation = mutation({
       prompt,
       response,
       ecoModeActive,
-      timestamp,
     });
     
     return conversationId;
@@ -33,7 +31,7 @@ export const getUserConversations = query({
     return await ctx.db
       .query("conversations")
       .filter((q) => q.eq(q.field("userId"), args.userId))
-      .order("desc", (q) => q.field("timestamp"))
+      .order("desc", (q) => q.field("_creationTime"))
       .collect();
   },
 });
@@ -44,7 +42,7 @@ export const getAllConversations = query({
   handler: async (ctx) => {
     return await ctx.db
       .query("conversations")
-      .order("desc", (q) => q.field("timestamp"))
+      .order("desc", (q) => q.field("_creationTime"))
       .collect();
   },
 });

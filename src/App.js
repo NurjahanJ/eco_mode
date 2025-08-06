@@ -48,11 +48,11 @@ function App() {
       
       // Create user message
       const userMessage = createUserMessage(message);
-      userMessage.timestamp = new Date().toISOString();
+      // Using Convex's built-in _creationTime instead of custom timestamp
       
       // Create system response with user ID
       const systemResponse = createAssistantMessage(`Your User ID is: ${userId}`);
-      systemResponse.timestamp = new Date().toISOString();
+      // Using Convex's built-in _creationTime instead of custom timestamp
       
       // Update messages with both user message and system response
       setMessages([...messages, userMessage, systemResponse]);
@@ -64,7 +64,7 @@ function App() {
     }
 
     const userMessage = createUserMessage(message);
-    userMessage.timestamp = new Date().toISOString();
+    // Using Convex's built-in _creationTime instead of custom timestamp
 
     const newPromptCount = messages.filter(m => m.role === 'user').length + 1;
     const updatedMessages = [...messages, userMessage];
@@ -77,7 +77,7 @@ function App() {
         role: 'assistant',
         content: `🟡 **Processing query**\n\nLots of people are making queries in your region right now, so please hang tight for about 10~45 seconds! We are trying to reroute your prompt to more energy-efficient data centers or aggregate similar responses to process in batch.`,
         isEcoNotice: true,
-        timestamp: new Date().toISOString(),
+        // Using Convex's built-in _creationTime instead of custom timestamp
       };
 
       setMessages(prev => [...prev, reroutingMessage]);
@@ -96,7 +96,7 @@ function App() {
       role: 'assistant',
       content: '',
       isLoading: true,
-      timestamp: new Date().toISOString(),
+      // Using Convex's built-in _creationTime instead of custom timestamp
     };
 
     setMessages(prev => [...prev, loadingMessage]);
@@ -115,7 +115,7 @@ function App() {
         "I apologize, but I couldn't generate a response.";
 
       const assistantMessage = createAssistantMessage(assistantContent);
-      assistantMessage.timestamp = new Date().toISOString();
+      // Using Convex's built-in _creationTime instead of custom timestamp
 
       setMessages(prev =>
         [...prev.filter(m => !m.isLoading && !m.isEcoNotice), assistantMessage]
@@ -129,7 +129,7 @@ function App() {
     } catch (err) {
       console.error('Error during sendActualResponse:', err);
       const errorMessage = createAssistantMessage("Sorry, something went wrong.");
-      errorMessage.timestamp = new Date().toISOString();
+      // Using Convex's built-in _creationTime instead of custom timestamp
       errorMessage.isError = true;
       setMessages(prev =>
         [...prev.filter(m => !m.isLoading), errorMessage]

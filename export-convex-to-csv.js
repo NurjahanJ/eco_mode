@@ -33,8 +33,8 @@ function convertToCSV(data) {
       // Handle different data types
       let value = obj[header];
       
-      // Format timestamp as m/d/yyyy and hour:minutes
-      if (header === 'timestamp') {
+      // Format _creationTime field for better readability
+      if (header === '_creationTime') {
         const date = new Date(value);
         const month = date.getMonth() + 1; // getMonth() returns 0-11
         const day = date.getDate();

@@ -13,6 +13,6 @@ export default defineSchema({
     prompt: v.string(), // The user's prompt content
     response: v.string(), // The AI's response content
     ecoModeActive: v.boolean(), // Whether EcoMode was active for this response
-    timestamp: v.string(), // Timestamp of the conversation
+    // Using Convex's built-in _creationTime field instead of custom timestamp
   }),
 });
