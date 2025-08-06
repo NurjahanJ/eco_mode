@@ -6,7 +6,6 @@ import ChatInput from './components/ChatInput';
 import Header from './components/Header';
 import { useEcoMode } from './contexts/EcoModeContext';
 import EcoModeFAQ from './components/EcoModeFAQ';
-import logo from './images/logo.png';
 import leafIcon from './images/leaf-icon.svg';
 import Sidebar from './components/Sidebar';
 

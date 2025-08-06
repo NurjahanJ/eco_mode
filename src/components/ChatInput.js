@@ -5,16 +5,10 @@ import { Paintbrush, Globe, PencilLine, Binoculars } from 'lucide-react';
 
 const ChatInput = ({ onSendMessage, disabled }) => {
   const [message, setMessage] = useState('');
-  const [isListening, setIsListening] = useState(false);
-  const [isFileMenuOpen, setIsFileMenuOpen] = useState(false);
   const [isToolsMenuOpen, setIsToolsMenuOpen] = useState(false);
   const [isInputActive, setIsInputActive] = useState(false);
   const [toolsMenuPosition, setToolsMenuPosition] = useState({ top: 0, left: 0 });
-  const [fileMenuPosition, setFileMenuPosition] = useState({ top: 0, left: 0 });
   const textareaRef = useRef(null);
-  const fileInputRef = useRef(null);
-  const fileMenuRef = useRef(null);
-  const fileButtonRef = useRef(null);
   const toolsMenuRef = useRef(null);
   const toolsButtonRef = useRef(null);
   const { hasReachedLimit } = usePromptCount();
@@ -31,15 +25,6 @@ const ChatInput = ({ onSendMessage, disabled }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        isFileMenuOpen &&
-        fileMenuRef.current &&
-        !fileMenuRef.current.contains(event.target) &&
-        fileButtonRef.current &&
-        !fileButtonRef.current.contains(event.target)
-      ) {
-        setIsFileMenuOpen(false);
-      }
-      if (
         isToolsMenuOpen &&
         toolsMenuRef.current &&
         !toolsMenuRef.current.contains(event.target) &&
@@ -51,7 +36,7 @@ const ChatInput = ({ onSendMessage, disabled }) => {
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isFileMenuOpen, isToolsMenuOpen]);
+  }, [isToolsMenuOpen]);
 
   const handlePlaceholderClick = () => {
     if (!disabled && !hasReachedLimit) {
@@ -68,52 +53,11 @@ const ChatInput = ({ onSendMessage, disabled }) => {
     }
   };
 
-  const toggleSpeechRecognition = () => {
-    if (!isListening) {
-      startListening();
-    } else {
-      stopListening();
-    }
-  };
 
-  const startListening = () => {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) return alert('Speech recognition is not supported in your browser.');
 
-    const recognition = new SpeechRecognition();
-    recognition.continuous = true;
-    recognition.interimResults = true;
-    recognition.lang = 'en-US';
 
-    recognition.onstart = () => setIsListening(true);
-    recognition.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .map((result) => result[0].transcript)
-        .join('');
-      setMessage(transcript);
-    };
-    recognition.onerror = (e) => {
-      console.error('Speech recognition error', e.error);
-      setIsListening(false);
-    };
-    recognition.onend = () => setIsListening(false);
-    recognition.start();
-    window.recognition = recognition;
-  };
 
-  const stopListening = () => {
-    window.recognition?.stop();
-    setIsListening(false);
-  };
 
-  const handleFileButtonClick = () => {
-    if (!isFileMenuOpen && fileButtonRef.current) {
-      const rect = fileButtonRef.current.getBoundingClientRect();
-      setFileMenuPosition({ top: window.scrollY + rect.top - 10, left: rect.left });
-    }
-    setIsFileMenuOpen(!isFileMenuOpen);
-    if (isToolsMenuOpen) setIsToolsMenuOpen(false);
-  };
 
   const handleToolsButtonClick = () => {
     if (!isToolsMenuOpen && toolsButtonRef.current) {
@@ -121,13 +65,10 @@ const ChatInput = ({ onSendMessage, disabled }) => {
       setToolsMenuPosition({ top: window.scrollY + rect.top - 10, left: rect.left });
     }
     setIsToolsMenuOpen(!isToolsMenuOpen);
-    if (isFileMenuOpen) setIsFileMenuOpen(false);
+
   };
 
-  const handleFileUpload = () => {
-    console.log('File upload triggered');
-    setIsFileMenuOpen(false);
-  };
+
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
