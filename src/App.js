@@ -8,16 +8,15 @@ import { useEcoMode } from './contexts/EcoModeContext';
 import EcoModeFAQ from './components/EcoModeFAQ';
 import logo from './images/logo.png';
 import leafIcon from './images/leaf-icon.svg';
+import Sidebar from './components/Sidebar';
 
 function App() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  // No longer need these state variables as notification is handled in ChatHistory component
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
   const { isEcoModeActive, toggleEcoMode } = useEcoMode();
-  // const navigate = useNavigate(); // Removed unused variable
 
   useEffect(() => {
     scrollToBottom();
@@ -40,7 +39,6 @@ function App() {
     setMessages(updatedMessages);
 
     if (isEcoModeActive && newPromptCount === 1) {
-      // First prompt with EcoMode active - notification will be shown in ChatHistory
       sendActualResponse([...updatedMessages], modelId);
     } else if (isEcoModeActive && (newPromptCount === 3 || newPromptCount === 6)) {
       const reroutingMessage = {
@@ -103,8 +101,6 @@ function App() {
     }
   };
 
-  // const location = useLocation(); // Removed unused variable
-  
   return (
     <Routes>
       <Route path="/eco-mode-faq" element={<EcoModeFAQ />} />
@@ -122,94 +118,7 @@ function App() {
             </button>
           )}
 
-          {/* Sidebar */}
-          <div className={`flex flex-col h-full ${sidebarOpen ? 'w-[260px] min-w-[260px]' : 'w-0 min-w-0 overflow-hidden'} bg-gray-50 border-r border-gray-200 overflow-y-auto transition-all duration-300`}>
-            <div className="flex items-center justify-between p-4">
-              <div className="flex items-center">
-                <img 
-                  src={logo} 
-                  alt="Logo" 
-                  className="w-8 h-8 mr-2 cursor-pointer" 
-                  onClick={() => {
-                    setMessages([]);
-                  }}
-                />
-              </div>
-              <button 
-                onClick={() => setSidebarOpen(false)}
-                className="p-1 hover:bg-gray-100 rounded-md"
-                aria-label="Close sidebar"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="4" y="4" width="16" height="16" rx="3" stroke="#8e8ea0" strokeWidth="1.5" />
-                </svg>
-              </button>
-            </div>
-
-            <div className="px-2 py-4 space-y-4">
-              <button
-                onClick={() => setMessages([])}
-                className="w-full flex items-center gap-3 rounded-md px-2 py-1.5 text-sm hover:bg-gray-200"
-              >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 4V20M20 12H4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                New chat
-              </button>
-              
-              <button className="w-full flex items-center gap-3 rounded-md px-2 py-1.5 text-sm hover:bg-gray-200">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                Search chats
-              </button>
-              
-              <button className="w-full flex items-center gap-3 rounded-md px-2 py-1.5 text-sm hover:bg-gray-200">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M7 9H17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M7 13H17" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M7 17H13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                Library
-              </button>
-            </div>
-            
-            <div className="px-2 py-4 space-y-4">
-              <button className="w-full flex items-center gap-3 rounded-md px-2 py-1.5 text-sm hover:bg-gray-200">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M12 7V12L15 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                Codex
-              </button>
-              
-              <button className="w-full flex items-center gap-3 rounded-md px-2 py-1.5 text-sm hover:bg-gray-200">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M15 12L10 15V9L15 12Z" fill="currentColor" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                Sora
-              </button>
-              
-              <button className="w-full flex items-center gap-3 rounded-md px-2 py-1.5 text-sm hover:bg-gray-200">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.5"/>
-                  <path d="M5 20C5 16.6863 8.13401 14 12 14C15.866 14 19 16.6863 19 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-                </svg>
-                GPTs
-              </button>
-            </div>
-
-            <div className="flex-1"></div>
-
-            <div className="border-t border-gray-200 p-2">
-              <button className="w-full flex items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-gray-200">
-                View plans
-              </button>
-              <div className="text-xs text-gray-500 mt-1 ml-2">Unlimited access, team features, and more</div>
-            </div>
-          </div>
+          {sidebarOpen && <Sidebar setMessages={setMessages} />}
 
           <div className="flex flex-col flex-1 overflow-hidden">
             <Header hasMessages={messages.length > 0} />
@@ -264,6 +173,6 @@ function App() {
       } />
     </Routes>
   );
-};
+}
 
 export default App;
