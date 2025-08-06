@@ -6,7 +6,6 @@ import {
   Clock4,
   Play,
   CircleUserRound,
-  Square,
 } from 'lucide-react';
 import logo from '../images/logo.png';
 
@@ -43,11 +42,9 @@ const Sidebar = ({ setMessages, setSidebarOpen }) => {
         </button>
       </div>
 
-      {/* Divider */}
-      <div className="border-t border-gray-300 my-3 mx-3" />
 
       {/* Bottom links */}
-      <div className="flex flex-col px-3 gap-1">
+      <div className="flex flex-col px-3 gap-1 mt-4">
         <button className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded-md">
           <Clock4 className="w-[18px] h-[18px]" strokeWidth={1.5} />
           <span>Codex</span>

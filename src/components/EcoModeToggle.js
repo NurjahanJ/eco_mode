@@ -21,7 +21,7 @@ const EcoModeToggle = () => {
         height="24"
         className={`transition-transform duration-300 ${isEcoModeActive ? 'rotate-12 filter-green' : 'filter-black'}`}
         style={{
-          filter: isEcoModeActive ? 'invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(90%) contrast(80%)' : 'none'
+          filter: isEcoModeActive ? 'invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(90%) contrast(80%)' : 'brightness(0)'
         }}
       />
     </button>
