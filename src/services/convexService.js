@@ -1,6 +1,17 @@
 import { useMutation, useQuery } from "convex/react";
-import { api } from "../../convex/_generated/api";
 import { nanoid } from "nanoid";
+
+// Import a mock API until Convex is properly initialized
+const api = {
+  users: {
+    getOrCreateUser: "users:getOrCreateUser"
+  },
+  conversations: {
+    storeConversation: "conversations:storeConversation",
+    getUserConversations: "conversations:getUserConversations",
+    getAllConversations: "conversations:getAllConversations"
+  }
+};
 
 /**
  * Service for interacting with Convex database

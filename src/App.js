@@ -41,6 +41,28 @@ function App() {
   const handleSendMessage = async (message, modelId = 'gpt-4o') => {
     if (!message.trim()) return;
 
+    // Check if the message is the special 'COMPLETE' command
+    if (message.trim().toUpperCase() === 'COMPLETE') {
+      // Get the user ID from localStorage
+      const userId = localStorage.getItem('userId') || 'User ID not found';
+      
+      // Create user message
+      const userMessage = createUserMessage(message);
+      userMessage.timestamp = new Date().toISOString();
+      
+      // Create system response with user ID
+      const systemResponse = createAssistantMessage(`Your User ID is: ${userId}`);
+      systemResponse.timestamp = new Date().toISOString();
+      
+      // Update messages with both user message and system response
+      setMessages([...messages, userMessage, systemResponse]);
+      
+      // Store this interaction in Convex
+      storeConversation(message, `Your User ID is: ${userId}`, isEcoModeActive);
+      
+      return; // Exit early, no need to process further
+    }
+
     const userMessage = createUserMessage(message);
     userMessage.timestamp = new Date().toISOString();
 
