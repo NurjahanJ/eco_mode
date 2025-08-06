@@ -30,7 +30,7 @@ function App() {
       await getOrCreateUser();
     };
     initUser();
-  }, [messages]);
+  }, [messages, getOrCreateUser]);
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
