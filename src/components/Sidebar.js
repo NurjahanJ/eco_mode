@@ -46,15 +46,15 @@ const Sidebar = ({ setMessages, setSidebarOpen }) => {
       {/* Bottom links */}
       <div className="flex flex-col px-3 gap-1 mt-4">
         <button className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded-md">
-          <Clock4 className="w-[18px] h-[18px]" strokeWidth={1.5} />
+          <img src="/images/codex.png" alt="Codex" className="w-[22px] h-[22px]" />
           <span>Codex</span>
         </button>
         <button className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded-md">
-          <Play className="w-[18px] h-[18px]" strokeWidth={1.5} />
+          <img src="/images/sora.png" alt="Sora" className="w-[18px] h-[18px]" />
           <span>Sora</span>
         </button>
         <button className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded-md">
-          <CircleUserRound className="w-[18px] h-[18px]" strokeWidth={1.5} />
+          <img src="/images/gpts.png" alt="GPTs" className="w-[18px] h-[18px]" />
           <span>GPTs</span>
         </button>
       </div>

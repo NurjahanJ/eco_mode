@@ -117,7 +117,7 @@ const ChatInput = ({ onSendMessage, disabled }) => {
               </button>
               {isToolsMenuOpen && (
                 <div ref={toolsMenuRef} className="fixed w-64 rounded-2xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50" style={{ top: `${toolsMenuPosition.top}px`, left: `${toolsMenuPosition.left}px`, transform: 'translateY(-100%)', marginTop: '-10px' }}>
-                  <div className="py-2 divide-y divide-gray-200">
+                  <div className="py-2">
                     <button className="flex items-center w-full px-4 py-3 text-sm text-left text-gray-800 hover:bg-gray-100">
                       <Paintbrush className="mr-3 h-5 w-5" /> Create an image
                     </button>
