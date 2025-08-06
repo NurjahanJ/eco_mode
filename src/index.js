@@ -8,18 +8,21 @@ import reportWebVitals from './reportWebVitals';
 import { PromptCountProvider } from './contexts/PromptCountContext';
 import { ModelProvider } from './contexts/ModelContext';
 import { EcoModeProvider } from './contexts/EcoModeContext';
+import { ConvexClientProvider } from './convex/ConvexClient';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <PromptCountProvider>
-        <ModelProvider>
-          <EcoModeProvider>
-            <App />
-          </EcoModeProvider>
-        </ModelProvider>
-      </PromptCountProvider>
+      <ConvexClientProvider>
+        <PromptCountProvider>
+          <ModelProvider>
+            <EcoModeProvider>
+              <App />
+            </EcoModeProvider>
+          </ModelProvider>
+        </PromptCountProvider>
+      </ConvexClientProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

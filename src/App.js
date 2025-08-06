@@ -8,6 +8,7 @@ import { useEcoMode } from './contexts/EcoModeContext';
 import EcoModeFAQ from './components/EcoModeFAQ';
 import leafIcon from './images/leaf-icon.svg';
 import Sidebar from './components/Sidebar';
+import { useStoreConversation, useGetOrCreateUser } from './services/convexService';
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -16,9 +17,19 @@ function App() {
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
   const { isEcoModeActive, toggleEcoMode } = useEcoMode();
+  
+  // Convex hooks for data collection
+  const storeConversation = useStoreConversation();
+  const getOrCreateUser = useGetOrCreateUser();
 
   useEffect(() => {
     scrollToBottom();
+    
+    // Initialize user ID on component mount
+    const initUser = async () => {
+      await getOrCreateUser();
+    };
+    initUser();
   }, [messages]);
 
   const scrollToBottom = () => {
@@ -87,6 +98,12 @@ function App() {
       setMessages(prev =>
         [...prev.filter(m => !m.isLoading && !m.isEcoNotice), assistantMessage]
       );
+      
+      // Store conversation in Convex
+      const lastUserMessage = messagesToSend.filter(m => m.role === 'user').pop();
+      if (lastUserMessage) {
+        storeConversation(lastUserMessage.content, assistantContent, isEcoModeActive);
+      }
     } catch (err) {
       console.error('Error during sendActualResponse:', err);
       const errorMessage = createAssistantMessage("Sorry, something went wrong.");
