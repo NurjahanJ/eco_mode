@@ -111,13 +111,16 @@ function App() {
               className="absolute top-4 left-4 p-2 hover:bg-gray-100 rounded-md"
               aria-label="Open sidebar"
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="4" y="4" width="16" height="16" rx="3" stroke="#8e8ea0" strokeWidth="1.5" />
-              </svg>
+              <img 
+                src="/images/sidebar_toggle.svg" 
+                alt="Toggle Sidebar" 
+                width="24" 
+                height="24" 
+              />
             </button>
           )}
 
-          {sidebarOpen && <Sidebar setMessages={setMessages} />}
+          {sidebarOpen && <Sidebar setMessages={setMessages} setSidebarOpen={setSidebarOpen} />}
 
           <div className="flex flex-col flex-1 overflow-hidden">
             <Header hasMessages={messages.length > 0} />

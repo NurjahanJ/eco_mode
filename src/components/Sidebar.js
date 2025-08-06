@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import logo from '../images/logo.png';
 
-const Sidebar = ({ setMessages }) => {
+const Sidebar = ({ setMessages, setSidebarOpen }) => {
   return (
     <div className="flex flex-col h-screen w-[260px] min-w-[260px] bg-[#f7f7f8] border-r border-gray-200 text-sm">
       {/* Top logo and square button */}
@@ -18,8 +18,12 @@ const Sidebar = ({ setMessages }) => {
         <button onClick={() => setMessages([])} className="flex items-center">
           <img src={logo} alt="Logo" className="w-[20px] h-[20px]" />
         </button>
-        <button className="hover:bg-gray-100 p-1 rounded-md">
-          <Square className="w-[16px] h-[16px] text-gray-500" strokeWidth={1.75} />
+        <button 
+          onClick={() => setSidebarOpen(false)} 
+          className="hover:bg-gray-100 p-1 rounded-md"
+          aria-label="Close sidebar"
+        >
+          <img src="/images/sidebar_toggle.svg" alt="Toggle Sidebar" className="w-[16px] h-[16px]" />
         </button>
       </div>
 
