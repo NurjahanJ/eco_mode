@@ -43,8 +43,6 @@ const Sidebar = ({ setMessages, setSidebarOpen }) => {
         </button>
       </div>
 
-      {/* Divider */}
-      <div className="border-t border-gray-300 my-3 mx-3" />
 
       {/* Bottom links */}
       <div className="flex flex-col px-3 gap-1">
