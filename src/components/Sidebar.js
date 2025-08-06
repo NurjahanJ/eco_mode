@@ -3,9 +3,6 @@ import {
   Plus,
   Search,
   Image,
-  Clock4,
-  Play,
-  CircleUserRound,
 } from 'lucide-react';
 import logo from '../images/logo.png';
 
