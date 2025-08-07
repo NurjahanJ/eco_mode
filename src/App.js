@@ -8,6 +8,7 @@ import { useEcoMode } from './contexts/EcoModeContext';
 import EcoModeFAQ from './components/EcoModeFAQ';
 import leafIcon from './images/leaf-icon.svg';
 import Sidebar from './components/Sidebar';
+import { useStoreConversation, useGetOrCreateUser } from './services/convexService';
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -16,10 +17,20 @@ function App() {
   const messagesEndRef = useRef(null);
   const chatContainerRef = useRef(null);
   const { isEcoModeActive, toggleEcoMode } = useEcoMode();
+  
+  // Convex hooks for data collection
+  const storeConversation = useStoreConversation();
+  const getOrCreateUser = useGetOrCreateUser();
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages]);
+    
+    // Initialize user ID on component mount
+    const initUser = async () => {
+      await getOrCreateUser();
+    };
+    initUser();
+  }, [messages, getOrCreateUser]);
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
@@ -30,8 +41,30 @@ function App() {
   const handleSendMessage = async (message, modelId = 'gpt-4o') => {
     if (!message.trim()) return;
 
+    // Check if the message is the special 'COMPLETE' command
+    if (message.trim().toUpperCase() === 'COMPLETE') {
+      // Get the user ID from localStorage
+      const userId = localStorage.getItem('userId') || 'User ID not found';
+      
+      // Create user message
+      const userMessage = createUserMessage(message);
+      // Using Convex's built-in _creationTime instead of custom timestamp
+      
+      // Create system response with user ID
+      const systemResponse = createAssistantMessage(`Your User ID is: ${userId}`);
+      // Using Convex's built-in _creationTime instead of custom timestamp
+      
+      // Update messages with both user message and system response
+      setMessages([...messages, userMessage, systemResponse]);
+      
+      // Store this interaction in Convex
+      storeConversation(message, `Your User ID is: ${userId}`, isEcoModeActive);
+      
+      return; // Exit early, no need to process further
+    }
+
     const userMessage = createUserMessage(message);
-    userMessage.timestamp = new Date().toISOString();
+    // Using Convex's built-in _creationTime instead of custom timestamp
 
     const newPromptCount = messages.filter(m => m.role === 'user').length + 1;
     const updatedMessages = [...messages, userMessage];
@@ -44,7 +77,7 @@ function App() {
         role: 'assistant',
         content: `🟡 **Processing query**\n\nLots of people are making queries in your region right now, so please hang tight for about 10~45 seconds! We are trying to reroute your prompt to more energy-efficient data centers or aggregate similar responses to process in batch.`,
         isEcoNotice: true,
-        timestamp: new Date().toISOString(),
+        // Using Convex's built-in _creationTime instead of custom timestamp
       };
 
       setMessages(prev => [...prev, reroutingMessage]);
@@ -63,7 +96,7 @@ function App() {
       role: 'assistant',
       content: '',
       isLoading: true,
-      timestamp: new Date().toISOString(),
+      // Using Convex's built-in _creationTime instead of custom timestamp
     };
 
     setMessages(prev => [...prev, loadingMessage]);
@@ -82,15 +115,21 @@ function App() {
         "I apologize, but I couldn't generate a response.";
 
       const assistantMessage = createAssistantMessage(assistantContent);
-      assistantMessage.timestamp = new Date().toISOString();
+      // Using Convex's built-in _creationTime instead of custom timestamp
 
       setMessages(prev =>
         [...prev.filter(m => !m.isLoading && !m.isEcoNotice), assistantMessage]
       );
+      
+      // Store conversation in Convex
+      const lastUserMessage = messagesToSend.filter(m => m.role === 'user').pop();
+      if (lastUserMessage) {
+        storeConversation(lastUserMessage.content, assistantContent, isEcoModeActive);
+      }
     } catch (err) {
       console.error('Error during sendActualResponse:', err);
       const errorMessage = createAssistantMessage("Sorry, something went wrong.");
-      errorMessage.timestamp = new Date().toISOString();
+      // Using Convex's built-in _creationTime instead of custom timestamp
       errorMessage.isError = true;
       setMessages(prev =>
         [...prev.filter(m => !m.isLoading), errorMessage]
