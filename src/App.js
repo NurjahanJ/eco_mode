@@ -96,7 +96,7 @@ function App() {
       role: 'assistant',
       content: '',
       isLoading: true,
-      // Using Convex's built-in _creationTime instead of custom timestamp
+      timestamp: new Date().toISOString() // Add timestamp for proper date display
     };
 
     setMessages(prev => [...prev, loadingMessage]);

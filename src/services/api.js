@@ -103,7 +103,8 @@ export const sendConversation = async (messages, modelId = 'gpt-4o', retries = 2
  */
 export const createUserMessage = (content) => ({
   role: 'user',
-  content
+  content,
+  timestamp: new Date().toISOString() // Add timestamp in ISO format
 });
 
 /**
@@ -113,7 +114,8 @@ export const createUserMessage = (content) => ({
  */
 export const createSystemMessage = (content) => ({
   role: 'system',
-  content
+  content,
+  timestamp: new Date().toISOString() // Add timestamp in ISO format
 });
 
 /**
@@ -123,5 +125,6 @@ export const createSystemMessage = (content) => ({
  */
 export const createAssistantMessage = (content) => ({
   role: 'assistant',
-  content
+  content,
+  timestamp: new Date().toISOString() // Add timestamp in ISO format
 });
