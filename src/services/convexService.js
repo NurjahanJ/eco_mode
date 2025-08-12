@@ -19,8 +19,14 @@ export const useGetOrCreateUser = () => {
     
     if (!userId) {
       // If no user ID in local storage, create a new one
-      userId = await createUser();
+      userId = await createUser({ existingUserId: null });
       // Store the user ID in local storage
+      localStorage.setItem('userId', userId);
+    } else {
+      // If user ID exists in local storage, verify it exists in the database
+      // This will either return the existing ID or create a new one if it doesn't exist
+      userId = await createUser({ existingUserId: userId });
+      // Update the user ID in local storage in case a new one was created
       localStorage.setItem('userId', userId);
     }
     
@@ -31,12 +37,18 @@ export const useGetOrCreateUser = () => {
 // Store a conversation in Convex
 export const useStoreConversation = () => {
   const storeConversationMutation = useMutation(api.conversations.storeConversation);
+  const createUser = useMutation(api.users.getOrCreateUser);
   
   return async (prompt, response, isEcoModeActive) => {
-    // Get user ID from local storage or generate a temporary one
+    // Get user ID from local storage or create a new one
     let userId = localStorage.getItem('userId');
     if (!userId) {
-      userId = nanoid(10);
+      // If no user ID in local storage, create a new one
+      userId = await createUser({ existingUserId: null });
+      localStorage.setItem('userId', userId);
+    } else {
+      // Verify the user exists in the database
+      userId = await createUser({ existingUserId: userId });
       localStorage.setItem('userId', userId);
     }
     

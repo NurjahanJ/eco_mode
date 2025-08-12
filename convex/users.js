@@ -4,9 +4,22 @@ import { nanoid } from "nanoid";
 
 // Create a new user or retrieve existing user ID from storage
 export const getOrCreateUser = mutation({
-  args: {},
-  handler: async (ctx) => {
-    // Generate a unique ID
+  args: { existingUserId: v.optional(v.string()) },
+  handler: async (ctx, args) => {
+    // If an existing user ID is provided, check if it exists in the database
+    if (args.existingUserId) {
+      const existingUser = await ctx.db
+        .query("users")
+        .filter((q) => q.eq(q.field("userId"), args.existingUserId))
+        .first();
+      
+      // If the user exists, return their ID
+      if (existingUser) {
+        return existingUser.userId;
+      }
+    }
+    
+    // If no existing user or user not found, generate a unique ID
     const userId = nanoid(10);
     
     // Store the user in the database
