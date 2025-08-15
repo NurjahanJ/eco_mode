@@ -82,7 +82,7 @@ function App() {
         role: 'assistant',
         content: `🟡 **Processing query**\n\nLots of people are making queries in your region right now, so please hang tight for about 10~45 seconds! We are trying to reroute your prompt to more energy-efficient data centers or aggregate similar responses to process in batch.`,
         isEcoNotice: true,
-        // Using Convex's built-in _creationTime instead of custom timestamp
+        timestamp: Date.now() // Add timestamp to fix the Invalid Date issue
       };
 
       setMessages(prev => [...prev, reroutingMessage]);
