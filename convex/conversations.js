@@ -12,12 +12,22 @@ export const storeConversation = mutation({
   handler: async (ctx, args) => {
     const { userId, prompt, response, ecoModeActive } = args;
     
-    // Store the conversation in the database
+    // Get the user's previous conversations to calculate promptNumber
+    const userConversations = await ctx.db
+      .query("conversations")
+      .filter((q) => q.eq(q.field("userId"), userId))
+      .collect();
+    
+    // Calculate the promptNumber (number of previous conversations + 1)
+    const promptNumber = userConversations.length + 1;
+    
+    // Store the conversation in the database with promptNumber
     const conversationId = await ctx.db.insert("conversations", {
       userId,
       prompt,
       response,
       ecoModeActive,
+      promptNumber,
     });
     
     return conversationId;
