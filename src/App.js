@@ -8,7 +8,7 @@ import { useEcoMode } from './contexts/EcoModeContext';
 import EcoModeFAQ from './components/EcoModeFAQ';
 import leafIcon from './images/leaf-icon.svg';
 import Sidebar from './components/Sidebar';
-import { useStoreConversation, useGetOrCreateUser } from './services/convexService';
+import { useStoreConversation, useGetUserId } from './services/convexService';
 
 function App() {
   const [messages, setMessages] = useState([]);
@@ -20,17 +20,22 @@ function App() {
   
   // Convex hooks for data collection
   const storeConversation = useStoreConversation();
-  const getOrCreateUser = useGetOrCreateUser();
+  const getUserId = useGetUserId();
 
   useEffect(() => {
     scrollToBottom();
     
-    // Initialize user ID on component mount
-    const initUser = async () => {
-      await getOrCreateUser();
+    // Check if user ID exists on component mount
+    const checkUserId = () => {
+      const userId = getUserId();
+      if (!userId) {
+        // Generate a temporary ID if none exists
+        const tempId = Math.random().toString(36).substring(2, 12);
+        localStorage.setItem('userId', tempId);
+      }
     };
-    initUser();
-  }, [messages, getOrCreateUser]);
+    checkUserId();
+  }, [messages, getUserId]);
 
   const scrollToBottom = () => {
     if (messagesEndRef.current) {
@@ -41,8 +46,8 @@ function App() {
   const handleSendMessage = async (message, modelId = 'gpt-4o') => {
     if (!message.trim()) return;
 
-    // Check if the message is the special 'COMPLETE' command
-    if (message.trim().toUpperCase() === 'COMPLETE') {
+    // Check if the message is the special 'GREENERAI' command
+    if (message.trim().toUpperCase() === 'GREENERAI') {
       // Get the user ID from localStorage
       const userId = localStorage.getItem('userId') || 'User ID not found';
       
