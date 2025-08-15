@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "convex/react";
-import { nanoid } from "nanoid";
 
 // Import the real Convex API
 import { api } from "../convex/_generated/api";
