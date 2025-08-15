@@ -4,7 +4,7 @@ import { internalMutation } from "../_generated/server";
  * Migration script to add promptNumber to existing conversations
  * Run this once after updating the schema to add promptNumber field
  */
-export const addPromptNumberToExistingConversations = internalMutation({
+export const add = internalMutation({
   args: {},
   handler: async (ctx) => {
     // Get all users
