@@ -109,8 +109,38 @@ async function exportConversations() {
       return;
     }
     
+    // Group conversations by userId
+    const userConversations = {};
+    
+    // Sort conversations by creation time for each user
+    conversations.forEach(conv => {
+      if (!userConversations[conv.userId]) {
+        userConversations[conv.userId] = [];
+      }
+      userConversations[conv.userId].push(conv);
+    });
+    
+    // Sort each user's conversations by creation time (oldest first)
+    Object.keys(userConversations).forEach(userId => {
+      userConversations[userId].sort((a, b) => {
+        return new Date(a._creationTime) - new Date(b._creationTime);
+      });
+    });
+    
+    // Add promptNumber to each conversation
+    const conversationsWithPromptNumber = [];
+    Object.keys(userConversations).forEach(userId => {
+      userConversations[userId].forEach((conv, index) => {
+        // Create a new object with all existing properties plus promptNumber
+        conversationsWithPromptNumber.push({
+          ...conv,
+          promptNumber: index + 1 // 1-based indexing
+        });
+      });
+    });
+    
     console.log(`Found ${conversations.length} conversations`);
-    saveToCSV(conversations, "conversations.csv");
+    saveToCSV(conversationsWithPromptNumber, "conversations.csv");
   } catch (error) {
     console.error("Error exporting conversations:", error);
   }

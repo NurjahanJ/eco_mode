@@ -12,12 +12,40 @@ export const storeConversation = mutation({
   handler: async (ctx, args) => {
     const { userId, prompt, response, ecoModeActive } = args;
     
-    // Store the conversation in the database
+    // Get the user's previous conversations to calculate promptNumber
+    const userConversations = await ctx.db
+      .query("conversations")
+      .filter((q) => q.eq(q.field("userId"), userId))
+      .collect();
+    
+    // Calculate the promptNumber (number of previous conversations + 1)
+    const promptNumber = userConversations.length + 1;
+    
+    // Check if user exists, create only if this is their first prompt
+    let user = await ctx.db
+      .query("users")
+      .filter((q) => q.eq(q.field("userId"), userId))
+      .first();
+    
+    if (!user) {
+      // Create user only when they make their first prompt
+      const userId_doc = await ctx.db.insert("users", {
+        userId,
+        totalPrompts: 1, // Initialize with 1 since this is their first prompt
+      });
+    } else {
+      // Update existing user's totalPrompts count
+      const currentTotal = user.totalPrompts || 0;
+      await ctx.db.patch(user._id, { totalPrompts: currentTotal + 1 });
+    }
+    
+    // Store the conversation in the database with promptNumber
     const conversationId = await ctx.db.insert("conversations", {
       userId,
       prompt,
       response,
       ecoModeActive,
+      promptNumber,
     });
     
     return conversationId;

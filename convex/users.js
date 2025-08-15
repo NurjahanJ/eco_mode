@@ -25,6 +25,7 @@ export const getOrCreateUser = mutation({
     // Store the user in the database
     await ctx.db.insert("users", {
       userId,
+      totalPrompts: 0, // Initialize total prompts count
     });
     
     return userId;

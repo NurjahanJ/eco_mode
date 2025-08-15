@@ -14,6 +14,9 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as conversations from "../conversations.js";
+import type * as migrations_addPromptNumber from "../migrations/addPromptNumber.js";
+import type * as migrations_addTotalPrompts from "../migrations/addTotalPrompts.js";
+import type * as migrations_cleanupZeroPromptUsers from "../migrations/cleanupZeroPromptUsers.js";
 import type * as users from "../users.js";
 
 /**
@@ -26,6 +29,9 @@ import type * as users from "../users.js";
  */
 declare const fullApi: ApiFromModules<{
   conversations: typeof conversations;
+  "migrations/addPromptNumber": typeof migrations_addPromptNumber;
+  "migrations/addTotalPrompts": typeof migrations_addTotalPrompts;
+  "migrations/cleanupZeroPromptUsers": typeof migrations_cleanupZeroPromptUsers;
   users: typeof users;
 }>;
 export declare const api: FilterApi<
