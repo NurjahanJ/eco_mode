@@ -5,6 +5,7 @@ export default defineSchema({
   // Table to store user information
   users: defineTable({
     userId: v.string(), // Unique user ID
+    totalPrompts: v.optional(v.number()), // Total number of prompts by this user
   }),
 
   // Table to store prompts and responses with EcoMode state
