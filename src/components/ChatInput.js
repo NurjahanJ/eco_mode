@@ -112,12 +112,16 @@ const ChatInput = ({ onSendMessage, disabled }) => {
                 className="flex items-center ml-2 text-gray-500 hover:text-gray-700"
                 disabled={disabled || hasReachedLimit}
               >
-                <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" /></svg>
-                <span className="ml-1 text-sm">Tools</span>
+                <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg>
+                <span className="ml-1 text-sm"></span>
               </button>
               {isToolsMenuOpen && (
                 <div ref={toolsMenuRef} className="fixed w-64 rounded-2xl shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50" style={{ top: `${toolsMenuPosition.top}px`, left: `${toolsMenuPosition.left}px`, transform: 'translateY(-100%)', marginTop: '-10px' }}>
                   <div className="py-2">
+                    <button className="flex items-center w-full px-4 py-3 text-sm text-left text-gray-800 hover:bg-gray-100">
+                      <img src="/images/clip.png" alt="Clip" className="mr-3 h-5 w-5" /> Add photos & files
+                    </button>
+                    <div className="mx-4 my-1 border-t border-gray-200"></div>
                     <button className="flex items-center w-full px-4 py-3 text-sm text-left text-gray-800 hover:bg-gray-100">
                       <Paintbrush className="mr-3 h-5 w-5" /> Create Image
                     </button>
