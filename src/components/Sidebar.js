@@ -2,7 +2,6 @@ import React from 'react';
 import {
   Plus,
   Search,
-  Image,
 } from 'lucide-react';
 import logo from '../images/logo.png';
 
@@ -34,7 +33,7 @@ const Sidebar = ({ setMessages, setSidebarOpen }) => {
           <span>Search chats</span>
         </button>
         <button className="flex items-center gap-2 p-2 hover:bg-gray-200 rounded-md">
-          <Image className="w-[18px] h-[18px]" strokeWidth={1.5} />
+          <img src="/images/image-icon.png" alt="Library" className="w-[18px] h-[18px]" />
           <span>Library</span>
         </button>
       </div>
