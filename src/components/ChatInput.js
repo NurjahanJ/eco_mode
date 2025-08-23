@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { usePromptCount } from '../contexts/PromptCountContext';
 import { useModel } from '../contexts/ModelContext';
+import { useEcoMode } from '../contexts/EcoModeContext';
 import { Paintbrush, Globe, PencilLine, Binoculars } from 'lucide-react';
 
 const ChatInput = ({ onSendMessage, disabled }) => {
@@ -13,6 +14,7 @@ const ChatInput = ({ onSendMessage, disabled }) => {
   const toolsButtonRef = useRef(null);
   const { hasReachedLimit } = usePromptCount();
   const { selectedModel } = useModel();
+  const { isEcoModeActive } = useEcoMode();
 
   useEffect(() => {
     const textarea = textareaRef.current;
@@ -78,7 +80,7 @@ const ChatInput = ({ onSendMessage, disabled }) => {
   };
 
   return (
-    <div className="pt-2 px-4 pb-4 bg-white">
+    <div className={`pt-2 px-4 pb-4 ${isEcoModeActive ? 'bg-[#f0f8f0]' : 'bg-white'}`}>
       <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
         <div className="relative rounded-3xl border bg-white border-gray-200 shadow-sm overflow-hidden">
           <div className="px-4 pt-4 pb-3 cursor-text" onClick={handlePlaceholderClick}>

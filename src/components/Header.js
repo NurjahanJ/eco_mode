@@ -10,7 +10,7 @@ const Header = ({ hasMessages }) => {
   
   return (
     <>
-      <header className="py-3 px-4 bg-white border-none">
+      <header className={`py-3 px-4 ${isEcoModeActive ? 'bg-[#f0f8f0]' : 'bg-white'} border-none`}>
         <div className="max-w-5xl mx-auto flex items-center">
           <div className="w-1/3 flex justify-start">
             <ModelSelector />

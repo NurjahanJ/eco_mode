@@ -169,14 +169,14 @@ function App() {
           <div className="flex flex-col flex-1 overflow-hidden">
             <Header hasMessages={messages.length > 0} />
             {messages.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-full">
+              <div className={`flex flex-col items-center justify-center h-full ${isEcoModeActive ? 'bg-[#f0f8f0]' : ''}`}>
                 <div className="text-center max-w-xl mb-6">
                   <h2 className="text-3xl mb-10">
                     {isEcoModeActive ? (
                       <>
-                        <div className="text-2xl font-medium text-green-600 mb-3">EcoMode</div>
-                        <div className="text-base text-gray-600">
-                          Based on current energy demands, we may process your request with more energy-efficient models, or through energy-efficient data centers and regions.
+                        <div className="text-2xl font-medium text-green-700 mb-3">EcoMode</div>
+                        <div className="text-base text-gray-700 font-medium text-center">
+                          Based on current energy demands in your region or timeline, we may slightly delay processing your request by adjusting to more energy-efficient models, rerouting your prompts through energy-efficient data centers and regions, or aggregating similar responses to process in batch.
                         </div>
                       </>
                     ) : (
@@ -197,7 +197,7 @@ function App() {
               <>
                 <div className="flex-1 w-full overflow-hidden" style={{ height: 'calc(100vh - 140px)' }}>
                   <div
-                    className="h-full overflow-y-auto scroll-smooth pb-4 px-4"
+                    className={`h-full overflow-y-auto scroll-smooth pb-4 px-4 ${isEcoModeActive ? 'bg-[#f0f8f0]' : ''}`}
                     ref={chatContainerRef}
                   >
                     <ChatHistory
@@ -207,7 +207,7 @@ function App() {
                     />
                   </div>
                 </div>
-                <div className="p-4 bg-white flex justify-center">
+                <div className={`p-4 ${isEcoModeActive ? 'bg-[#f0f8f0]' : 'bg-white'} flex justify-center`}>
                   <div className="w-full max-w-[850px]">
                     <ChatInput onSendMessage={handleSendMessage} disabled={loading} />
                   </div>
