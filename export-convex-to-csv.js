@@ -42,12 +42,14 @@ function convertToCSV(data) {
         const hours = date.getHours();
         const minutes = date.getMinutes();
         
-        // Format as m/d/yyyy h:mm (AM/PM)
+        // Format as mm/dd/yyyy, hour:minute AM/PM
         const ampm = hours >= 12 ? 'PM' : 'AM';
         const formattedHours = hours % 12 || 12; // Convert 0 to 12 for 12 AM
         const formattedMinutes = minutes.toString().padStart(2, '0');
+        const formattedMonth = month.toString().padStart(2, '0');
+        const formattedDay = day.toString().padStart(2, '0');
         
-        value = `${month}/${day}/${year} ${formattedHours}:${formattedMinutes} ${ampm}`;
+        value = `${formattedMonth}/${formattedDay}/${year}, ${formattedHours}:${formattedMinutes} ${ampm}`;
       }
       
       if (value === null || value === undefined) {
