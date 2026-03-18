@@ -61,3 +61,7 @@ This project can be deployed on platforms like Vercel or Netlify.
 1. Connect your repository to your preferred deployment platform
 2. Configure any required environment variables
 3. Deploy and verify the UI functions as expected
+
+## Dependency Updates
+
+See [DEPENDENCY_UPDATES.md](DEPENDENCY_UPDATES.md) for a full changelog of dependency version updates.
